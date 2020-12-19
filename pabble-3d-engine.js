@@ -28,9 +28,9 @@ function goto3d(x, y, z, xrot, yrot, scale, xoffset, yoffset) {
 	tY = y;
 	tZ = z;
 
-	X3D = ((cos(yrot)*tX) - (sin(yrot)*tY));
-	Y3D = ((cos(xrot) * ((sin(yrot) * tX) + (cos(yrot)*tY))) - (sin(xrot)*tZ));
-	Z3D = ((sin(xrot) * ((sin(yrot) * tX) + (cos(yrot)*tY))) + (cos(xrot)*tZ));
+	X3D = ((cos(xrot)*tX) - (sin(xrot)*tY));
+	Y3D = ((cos(yrot) * ((sin(xrot) * tX) + (cos(xrot)*tY))) - (sin(yrot)*tZ));
+	Z3D = ((sin(yrot) * ((sin(xrot) * tX) + (cos(xrot)*tY))) + (cos(yrot)*tZ));
 	tS = (Z3D + 10) * (scale/10);
 	X2D = (X3D * tS);
 	Y2D = (Y3D * tS);
