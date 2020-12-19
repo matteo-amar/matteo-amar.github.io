@@ -35,16 +35,17 @@ function tick(){
 	  inputKeys[e.code] = false;
 	}
 
+
 	if (inputKeys.ArrowLeft == true){
 		xrot+= 2;
 	}
 	if (inputKeys.ArrowRight == true){
 		xrot-= 2;
 	}
-	if (inputKeys.ArrowUp == true){
+	if ((inputKeys.ArrowUp == true) && (yrot < 180)){
 		yrot+= 2;
 	}
-	if (inputKeys.ArrowDown == true){
+	if ((inputKeys.ArrowDown == true) && (yrot > 0)){
 		yrot-= 2;
 	}
 

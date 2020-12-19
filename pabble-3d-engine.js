@@ -48,5 +48,3 @@ function goto3d(x, y, z, xrot, yrot, scale, xoffset, yoffset) {
 	};
 
 }
-
-// console.log(goto3d(1, 1, -1, 65, 250, 250));
