@@ -11,8 +11,8 @@ var cube = {
 }
 
 var grid = {
-	x: [1, 1, -1, -1],
-	y: [1, -1, 1, -1],
+	x: [-1, 1, 1, -1, -1],
+	y: [-1, -1, 1, 1, 1],
 	z: [0, 0, 0, 0]
 }
 
@@ -58,16 +58,16 @@ function tick(){
 	}
 
 
-	if (inputKeys.ArrowLeft == true){
+	if ((inputKeys.ArrowLeft == true) || (inputKeys.KeyA == true)){
 		xrot+= 2;
 	}
-	if (inputKeys.ArrowRight == true){
+	if ((inputKeys.ArrowRight == true) || (inputKeys.KeyD == true)){
 		xrot-= 2;
 	}
-	if ((inputKeys.ArrowUp == true) && (yrot < 180)){
+	if (((inputKeys.ArrowUp == true) || (inputKeys.KeyW == true)) && (yrot < 180)){
 		yrot+= 2;
 	}
-	if ((inputKeys.ArrowDown == true) && (yrot > 0)){
+	if (((inputKeys.ArrowDown == true) || (inputKeys.KeyS == true)) && (yrot > 0)){
 		yrot-= 2;
 	}
 
@@ -77,8 +77,10 @@ function tick(){
 		xrot += 360;
 	}
 	
+	scale = 100;
 	draw3d(cube);
-	draw3d(grid);
+	scale = 400;
+	// draw3d(grid);
 }
 
 function init(){
