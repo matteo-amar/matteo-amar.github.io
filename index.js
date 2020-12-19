@@ -22,19 +22,16 @@ function tick(){
 	ctx.strokeStyle = "rgb(255, 255, 255)";
 
 	for (var i = 0; i < points.x.length; i++){
-		line(goto3d(points.x[i], points.y[i], points.z[i], 65, canvas.width/2, canvas.height/2).x,
-			 goto3d(points.x[i], points.y[i], points.z[i], 65, canvas.width/2, canvas.height/2).y,
-			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1], 65, canvas.width/2, canvas.height/2).x,
-			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1], 65, canvas.width/2, canvas.height/2).y
-			);
-
-		// console.log(goto3d(points.x[i], points.y[i], points.z[i], 65, canvas.width/2, canvas.height/2));
-
+		line(goto3d(points.x[i], points.y[i], points.z[i], 			72, 145, 100).x + canvas.width/2,
+			 goto3d(points.x[i], points.y[i], points.z[i], 			72, 145, 100).y + canvas.height/2,
+			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1],	72, 145, 100).x + canvas.width/2,
+			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1], 	72, 145, 100).y + canvas.height/2);
 	}
 }
 
 function init(){
 	background(51, 51, 51);
 	//begin main loop
-	setInterval(function(){tick();}, 33.33);
+	// setInterval(function(){tick();}, 33.33);
+	tick();
 }
