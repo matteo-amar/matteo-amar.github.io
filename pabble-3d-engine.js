@@ -1,24 +1,6 @@
 // pabble's 2017 scratch 3d engine, 2020 remaster
 // all rights reserved. copyright pabble studios (c) 2017-2020
 
-var points = {
-	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
-	y: [1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1],
-	z: [1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1]
-}
-
-var rot = {
-	x: 0,
-	y: 0,
-	z: 0
-}
-
-var pos = {
-	x: 0,
-	y: 0,
-	z: 0
-}
-
 function goto3d(x, y, z, xrot, yrot, scale, xoffset, yoffset) {
 	var tX, tY, tZ, tS;
 	var X3D, Y3D, Z3D;
@@ -31,7 +13,7 @@ function goto3d(x, y, z, xrot, yrot, scale, xoffset, yoffset) {
 	X3D = ((cos(xrot)*tX) - (sin(xrot)*tY));
 	Y3D = ((cos(yrot) * ((sin(xrot) * tX) + (cos(xrot)*tY))) - (sin(yrot)*tZ));
 	Z3D = ((sin(yrot) * ((sin(xrot) * tX) + (cos(xrot)*tY))) + (cos(yrot)*tZ));
-	tS = (Z3D + 10) * (scale/10);
+	tS = (Z3D + 10) * (scale*0.1);
 	X2D = (X3D * tS);
 	Y2D = (Y3D * tS);
 

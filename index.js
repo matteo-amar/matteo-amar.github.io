@@ -4,6 +4,18 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
+var cube = {
+	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
+	y: [1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1],
+	z: [1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1]
+}
+
+var grid = {
+	x: [1, 1, -1, -1],
+	y: [1, -1, 1, -1],
+	z: [0, 0, 0, 0]
+}
+
 function background(r, g, b){
 	ctx.fillStyle = ("rgb("+r+", "+g+", "+b+")"); 
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -17,8 +29,18 @@ function line(x1, y1, x2, y2){
 	ctx.stroke();
 }
 
+function draw3d(points){
+	for (var i = 0; i < points.x.length; i++){
+		ctx.strokeStyle = "rgb(255, 255, 255)";
+		line(goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).x + canvas.width/2,
+			 goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).y + canvas.height/2,
+			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1],	xrot, yrot, scale).x + canvas.width/2,
+			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1], 	xrot, yrot, scale).y + canvas.height/2);
+	}
+}
 
-var xrot = 72, yrot = 144, scale = 144;
+
+var xrot = 60, yrot = 69, scale = 100;
 var inputKeys = {};
 
 function tick(){
@@ -49,14 +71,14 @@ function tick(){
 		yrot-= 2;
 	}
 
-	//drawing the points
-	for (var i = 0; i < points.x.length; i++){
-		ctx.strokeStyle = "rgb(255, 255, 255)";
-		line(goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).x + canvas.width/2,
-			 goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).y + canvas.height/2,
-			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1],	xrot, yrot, scale).x + canvas.width/2,
-			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1], 	xrot, yrot, scale).y + canvas.height/2);
+	if (xrot > 360){
+		xrot -= 360;
+	}if (xrot < 0){
+		xrot += 360;
 	}
+	
+	draw3d(cube);
+	draw3d(grid);
 }
 
 function init(){
