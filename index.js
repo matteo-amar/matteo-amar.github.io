@@ -4,6 +4,8 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
+// console.log(sqrt(25));
+
 var cube = {
 	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
 	y: [1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1],
@@ -12,8 +14,8 @@ var cube = {
 
 var grid = {
 	x: [-1, 1, 1, -1, -1],
-	y: [-1, -1, 1, 1, 1],
-	z: [0, 0, 0, 0]
+	y: [-1, -1, 1, 1, -1],
+	z: [0, 0, 0, 0, 0]
 }
 
 function background(r, g, b){
@@ -80,7 +82,7 @@ function tick(){
 	scale = 100;
 	draw3d(cube);
 	scale = 400;
-	// draw3d(grid);
+	draw3d(grid);
 }
 
 function init(){

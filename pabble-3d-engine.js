@@ -1,7 +1,7 @@
 // pabble's 2017 scratch 3d engine, 2020 remaster
 // all rights reserved. copyright pabble studios (c) 2017-2020
 
-function goto3d(x, y, z, xrot, yrot, scale, xoffset, yoffset) {
+function goto3d(x, y, z, xrot, yrot, scale) {
 	var tX, tY, tZ, tS;
 	var X3D, Y3D, Z3D;
 	var X2D, Y2D;
