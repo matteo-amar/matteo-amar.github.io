@@ -4,7 +4,20 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
-// console.log(sqrt(25));
+console.log(Math.cos(Math.log(3)));
+console.log(Math.sin(Math.log(3)));
+
+var graph = {
+	x: [],
+	y: [],
+	z: []
+}
+
+for (var i = -100; i < 100; i++){
+	graph.x.push(i);
+	graph.y.push(Math.cos(Math.log(i)));
+	graph.z.push(Math.sin(Math.log(i)));
+}
 
 var cube = {
 	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
@@ -79,10 +92,12 @@ function tick(){
 		xrot += 360;
 	}
 	
-	scale = 100;
-	draw3d(cube);
+	// scale = 100;
+	// draw3d(cube);
 	scale = 400;
 	draw3d(grid);
+	scale = 25;
+	draw3d(graph);
 }
 
 function init(){
