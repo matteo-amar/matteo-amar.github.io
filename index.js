@@ -13,11 +13,13 @@ var graph = {
 	z: []
 }
 
-for (var i = -100; i < 100; i++){
+for (var i = 0; i < 100; i++){
 	graph.x.push(i);
 	graph.y.push(Math.cos(Math.log(i)));
 	graph.z.push(Math.sin(Math.log(i)));
 }
+
+graph.x[graph.x.length] = undefined;
 
 var cube = {
 	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
@@ -74,16 +76,16 @@ function tick(){
 
 
 	if ((inputKeys.ArrowLeft == true) || (inputKeys.KeyA == true)){
-		xrot+= 2;
+		xrot+= 1;
 	}
 	if ((inputKeys.ArrowRight == true) || (inputKeys.KeyD == true)){
-		xrot-= 2;
+		xrot-= 1;
 	}
 	if (((inputKeys.ArrowUp == true) || (inputKeys.KeyW == true)) && (yrot < 180)){
-		yrot+= 2;
+		yrot+= 1;
 	}
 	if (((inputKeys.ArrowDown == true) || (inputKeys.KeyS == true)) && (yrot > 0)){
-		yrot-= 2;
+		yrot-= 1;
 	}
 
 	if (xrot > 360){
@@ -96,7 +98,7 @@ function tick(){
 	// draw3d(cube);
 	scale = 400;
 	draw3d(grid);
-	scale = 25;
+	scale = 50;
 	draw3d(graph);
 }
 
