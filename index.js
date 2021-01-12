@@ -11,7 +11,7 @@ var graph = {
 	z: []
 }
 
-for (var i = 0; i < 1; i+=0.0001){
+for (var i = 0; i < 20; i+=0.01){
 	graph.x.push(i);
 	graph.y.push(Math.cos(Math.log(i)));
 	graph.z.push(Math.sin(Math.log(i)));
