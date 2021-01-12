@@ -4,8 +4,6 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
-console.log(Math.cos(Math.log(3)));
-console.log(Math.sin(Math.log(3)));
 
 var graph = {
 	x: [],
@@ -13,7 +11,7 @@ var graph = {
 	z: []
 }
 
-for (var i = 0; i < 100; i++){
+for (var i = 0; i < 1; i+=0.0001){
 	graph.x.push(i);
 	graph.y.push(Math.cos(Math.log(i)));
 	graph.z.push(Math.sin(Math.log(i)));
@@ -21,17 +19,29 @@ for (var i = 0; i < 100; i++){
 
 graph.x[graph.x.length] = undefined;
 
+
 var cube = {
 	x: [1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1],
 	y: [1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1],
 	z: [1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1]
 }
 
+
 var grid = {
-	x: [-1, 1, 1, -1, -1],
-	y: [-1, -1, 1, 1, -1],
-	z: [0, 0, 0, 0, 0]
+	x: [0, 0, 0, 1, -1, 0, 0, 0],
+	y: [1, -1, 0, 0, 0, 0, 0, 0],
+	z: [0, 0, 0, 0, 0, 0, 1, -1]
 }
+
+var axis = {
+
+}
+
+
+/*
+
+*/
+
 
 function background(r, g, b){
 	ctx.fillStyle = ("rgb("+r+", "+g+", "+b+")"); 
@@ -46,9 +56,15 @@ function line(x1, y1, x2, y2){
 	ctx.stroke();
 }
 
-function draw3d(points){
+function draw3d(points, gradient){
 	for (var i = 0; i < points.x.length; i++){
-		ctx.strokeStyle = "rgb(255, 255, 255)";
+
+		if (gradient){
+			var hue = 255 - ((255 * i)/points.x.length);
+			ctx.strokeStyle = "rgb(" + hue + ", " + hue + ", " + hue + ")";
+		}
+
+
 		line(goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).x + canvas.width/2,
 			 goto3d(points.x[i], points.y[i], points.z[i], 			xrot, yrot, scale).y + canvas.height/2,
 			 goto3d(points.x[i+1], points.y[i+1], points.z[i+1],	xrot, yrot, scale).x + canvas.width/2,
@@ -57,13 +73,10 @@ function draw3d(points){
 }
 
 
-var xrot = 60, yrot = 69, scale = 100;
+var xrot = 60, yrot = 69, scale = 100, zoom = 1;
 var inputKeys = {};
 
 function tick(){
-
-	background(51, 51, 51);
-
 	//user input process
 	document.addEventListener('keydown', keyDown);
 	function keyDown(e) {
@@ -88,18 +101,39 @@ function tick(){
 		yrot-= 1;
 	}
 
+	if (((inputKeys.KeyZ == true) || (inputKeys.KeyW == true)) && (yrot < 180)){
+		zoom+= .05;
+	}
+	if (((inputKeys.KeyX == true) || (inputKeys.KeyS == true)) && (yrot > 0)){
+		zoom-= .05;
+	}
+	
+
 	if (xrot > 360){
 		xrot -= 360;
 	}if (xrot < 0){
 		xrot += 360;
 	}
+
+	background(51, 51, 51);
 	
+
+	/* drawing the shapes */
+
 	// scale = 100;
 	// draw3d(cube);
-	scale = 400;
-	draw3d(grid);
-	scale = 50;
-	draw3d(graph);
+
+
+	//drawing the axis
+	ctx.strokeStyle = "rgb(100, 100, 100)";
+	scale = 1000 * zoom;
+	draw3d(grid, false);
+
+
+	//drawing the graph
+	ctx.strokeStyle = "rgb(255, 255, 255)";
+	scale = 50 * zoom;
+	draw3d(graph, false);
 }
 
 function init(){
